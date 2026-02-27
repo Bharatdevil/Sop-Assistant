@@ -5,9 +5,3 @@ def load_documents():
     loader = PyPDFLoader(file_path)
     docs = loader.load()
     return docs
-# docs[0]
-
-# import pprint
-
-# pprint.pp(docs[0].metadata)
-# print(docs[0].page_content[:500])
