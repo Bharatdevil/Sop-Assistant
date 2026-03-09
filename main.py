@@ -9,12 +9,17 @@ docs = load_documents()
 chunks = split_documents(docs)
 
 # to check chunks
-print(chunks)
+# print(chunks)
+print("chunks 1:", chunks[0])
+print("chunks 2:", chunks[1])
+
+
+
 
 # Step 4: Create FAISS vector store
 create_pinecone_index(chunks)
 print("Ingestion complete ✅")
 print("Total pages:", len(docs))
 print("Total chunks:", len(chunks))
-print("chunks 1:", chunks[0])
-print("chunks 2:", chunks[1])
+# print("chunks 1:", chunks[0])
+# print("chunks 2:", chunks[1])

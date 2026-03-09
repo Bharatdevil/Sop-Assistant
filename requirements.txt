@@ -1,6 +1,7 @@
 langchain
 langchain-community
 google-genai
+sentence-transformers
 pinecone
 python-dotenv
 pypdf
