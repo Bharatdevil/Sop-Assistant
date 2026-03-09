@@ -34,3 +34,15 @@ def create_pinecone_index(chunks):
     index.upsert(vectors=vectors)
 
     print(f"Uploaded {len(vectors)} vectors to Pinecone")
+
+
+def search_query(query:str):
+    # 1 Convert query to vector
+    query_embedding = get_embeddings(query)
+
+    results=index.query(
+        vector=query_embedding,
+        top_k=3,
+        include_metadata=True
+    )
+    return results
