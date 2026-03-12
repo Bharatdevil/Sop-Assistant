@@ -32,29 +32,29 @@ if question:
     data = response.json()
 
     # handle rate limit or errors
-if "answer" not in data:
-    with st.chat_message("assistant"):
-        st.error(data.get("error", "Something went wrong"))
+    if "answer" not in data:
+        with st.chat_message("assistant"):
+            st.error(data.get("error", "Something went wrong"))
 
-    st.session_state.messages.append(
-        {"role": "assistant", "content": data.get("error", "Something went wrong")}
-    )
+        st.session_state.messages.append(
+            {"role": "assistant", "content": data.get("error", "Something went wrong")}
+        )
 
-else:
-    answer = data["answer"]
+    else:
+        answer = data["answer"]
 
-    sources_text = ""
+        sources_text = ""
 
-    if data["sources"]:
-        sources_text = "\n\n**Sources:**\n"
-        for s in data["sources"]:
-            sources_text += f"- Page {s['page']} – {s['document']}\n"
+        if data["sources"]:
+            sources_text = "\n\n**Sources:**\n"
+            for s in data["sources"]:
+                sources_text += f"- Page {s['page']} – {s['document']}\n"
 
-    final_answer = answer + sources_text
+        final_answer = answer + sources_text
 
-    with st.chat_message("assistant"):
-        st.markdown(final_answer)
+        with st.chat_message("assistant"):
+            st.markdown(final_answer)
 
-    st.session_state.messages.append(
-        {"role": "assistant", "content": final_answer}
-    )
+        st.session_state.messages.append(
+            {"role": "assistant", "content": final_answer}
+        )
