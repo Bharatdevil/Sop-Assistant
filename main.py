@@ -1,8 +1,8 @@
 import warnings
 warnings.filterwarnings("ignore")
-from fastapi import FastAPI,requests
+from fastapi import FastAPI,Request
 from pydantic import BaseModel
-t
+
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.middleware import SlowAPIMiddleware
@@ -33,7 +33,7 @@ def home():
 def ask(request: Request,data: Question):
 
     answer ,sources = ask_question(data.question)
-    # print(f"Answer:",answer +"\n" + "Sources",sources )
+    
     return {
         "answer": answer,
         "sources":sources}

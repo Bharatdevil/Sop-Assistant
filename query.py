@@ -1,5 +1,5 @@
 from app.pinecone_store import search_query
-from app.genai import generate_answer
+from app.llm import generate_answer
 
 
 def ask_question(question):
