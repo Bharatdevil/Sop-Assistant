@@ -42,7 +42,23 @@ def search_query(query:str):
 
     results=index.query(
         vector=query_embedding,
-        top_k=3,
+        top_k=5,
         include_metadata=True
     )
-    return results
+    contexts = []
+    sources=[]
+    seen = set()
+
+    for match in results["matches"]:
+        metadata = match["metadata"]
+
+        contexts.append(metadata["text"])
+        source_tuple = (metadata.get("source"), metadata.get("page"))
+        if source_tuple not in seen:
+            sources.append({
+                "document": metadata.get("source"),
+                "page": metadata.get("page")
+            })
+            seen.add(source_tuple)
+
+    return contexts, sources

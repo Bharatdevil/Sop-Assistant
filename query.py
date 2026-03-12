@@ -1,21 +1,14 @@
 from app.pinecone_store import search_query
-from app.llm import generate_answer
+from app.genai import generate_answer
 
 
-print("HR Policy Assistant")
-print("Type 'exit' to stop.\n")
+def ask_question(question):
+    contexts, sources = search_query(question)
 
-while True:
-    query = input("Ask question: ")
+    context_text = "\n".join(contexts)
 
-    if query.lower() == "exit":
-        print("Goodbye!")
-        break
-        
-    results = search_query(query)
+    answer = generate_answer(context_text, question)
+    if "outside the provided documents" in answer.lower():
+        sources = []
 
-    answer = generate_answer(results,query)
-
-    print("\nAnswer:")
-    print(answer)
-    print("-" * 50)
+    return answer, sources
